@@ -1,14 +1,16 @@
-const gameBoard = (() => {
-    const display = document.querySelector('#display')
-    let board = ['', '', '', '', '', '', '', '', '']
+// const gameBoard = (() => {
+//     const display = document.querySelector('#display')
+//     let board = ['', '', '', '', '', '', '', '', '']
 
-    board.forEach(marker => {
-        let div = document.createElement('div')
-        div.textContent = marker
-        div.setAttribute('class', 'square')
-        display.appendChild(div)
-    })
-})()
+//     board.forEach(marker => {
+//         let div = document.createElement('div')
+//         div.textContent = marker
+//         div.setAttribute('class', 'square')
+//         display.appendChild(div)
+//     })
+
+//     return {board}
+// })()
 
 const playerFactory = (name, marker) => {
     const getName = () => name;
@@ -18,8 +20,11 @@ const playerFactory = (name, marker) => {
 }
 
 const gameController = (() => {
-    const playerOne = playerFactory(window.prompt('Player 1:'), 'X')
-    const playerTwo = playerFactory(window.prompt('Player 2:'), 'O')
+    let board = ['', '', '', '', '', '', '', '', '']
+    // const playerOne = playerFactory(window.prompt('Player 1:'), 'X')
+    // const playerTwo = playerFactory(window.prompt('Player 2:'), 'O')
+    const playerOne = playerFactory('Rufio', 'X')
+    const playerTwo = playerFactory('Robby', 'O')
 
     const playerOneDisplay = document.querySelector('#player-one')
     playerOneDisplay.textContent = `${playerOne.getName()}: ${playerOne.getMarker()}`
@@ -34,6 +39,8 @@ const gameController = (() => {
         square.addEventListener('click', (e) => {
             if (!e.target.textContent) {
                 e.target.textContent = currentPlayer.getMarker()
+                board[e.target.id] = currentPlayer.getMarker()
+                checkGameOver()
                 if (currentPlayer === playerOne) {
                     currentPlayer = playerTwo
                 } else {
@@ -44,4 +51,19 @@ const gameController = (() => {
             }
         })
     })
+
+    const checkGameOver = () => {
+        if ((board[0] === board[1] && board[1] === board[2] && board[0] !== '')
+        || (board[3] === board[4] && board[4] === board[5] && board[3] !== '')
+        || (board[6] === board[7] && board[7] === board[8] && board[6] !== '')
+        || (board[0] === board[3] && board[3] === board[6] && board[0] !== '')
+        || (board[1] === board[4] && board[4] === board[7] && board[1] !== '')
+        || (board[2] === board[5] && board[5] === board[8] && board[2] !== '')
+        || (board[0] === board[4] && board[4] === board[8] && board[0] !== '')
+        || (board[2] === board[4] && board[4] === board[6] && board[2] !== '')) {
+            console.log("Game Over")
+        } else {
+            return
+        }
+    }
 })()
