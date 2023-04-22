@@ -18,8 +18,14 @@ const playerFactory = (name, marker) => {
 }
 
 const gameController = (() => {
-    const playerOne = playerFactory('Rick', 'X')
-    const playerTwo = playerFactory('Charlene', 'O')
+    const playerOne = playerFactory(window.prompt('Player 1:'), 'X')
+    const playerTwo = playerFactory(window.prompt('Player 2:'), 'O')
+
+    const playerOneDisplay = document.querySelector('#player-one')
+    playerOneDisplay.textContent = `${playerOne.getName()}: ${playerOne.getMarker()}`
+
+    const playerTwoDisplay = document.querySelector('#player-two')
+    playerTwoDisplay.textContent = `${playerTwo.getName()}: ${playerTwo.getMarker()}`
 
     let currentPlayer = playerOne
 
