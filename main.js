@@ -9,3 +9,10 @@ const gameBoard = (() => {
         display.appendChild(div)
     })
 })()
+
+const playerFactory = (name, marker) => {
+    const getName = () => name;
+    const getMarker = () => marker;
+
+    return {getName, getMarker}
+}
