@@ -11,8 +11,6 @@ body {
     width: 500px;
     display: grid;
     grid-template: repeat(3, 1fr) / repeat(3, 1fr);
-    /* place-items: center; */
-    /* border: 2px dotted black; */
 }
 
 #display > div {

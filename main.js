@@ -1,18 +1,11 @@
-const display = document.querySelector('#display')
-
 const gameBoard = (() => {
-    let board = ['X', 'X', 'O', 'O', 'O', 'X', 'X', 'O', 'X']
-    
-    const fillBoard = () => {
-        board.forEach(marker => {
-            let div = document.createElement('div')
-            div.textContent = marker
-            display.appendChild(div)
-        })
-    }
+    const display = document.querySelector('#display')
+    let board = ['', '', '', '', '', '', '', '', '']
 
-    return {fillBoard}
-
+    board.forEach(marker => {
+        let div = document.createElement('div')
+        div.textContent = marker
+        div.setAttribute('class', 'square')
+        display.appendChild(div)
+    })
 })()
-
-gameBoard.fillBoard()
