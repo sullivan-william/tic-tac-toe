@@ -16,3 +16,26 @@ const playerFactory = (name, marker) => {
 
     return {getName, getMarker}
 }
+
+const gameController = (() => {
+    const playerOne = playerFactory('Rick', 'X')
+    const playerTwo = playerFactory('Charlene', 'O')
+
+    let currentPlayer = playerOne
+
+    const squares = document.querySelectorAll('.square')
+    squares.forEach(square => {
+        square.addEventListener('click', (e) => {
+            if (!e.target.textContent) {
+                e.target.textContent = currentPlayer.getMarker()
+                if (currentPlayer === playerOne) {
+                    currentPlayer = playerTwo
+                } else {
+                    currentPlayer = playerOne
+                }
+            } else {
+                console.log("Invalid")
+            }
+        })
+    })
+})()
