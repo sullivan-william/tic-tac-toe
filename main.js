@@ -1,17 +1,3 @@
-// const gameBoard = (() => {
-//     const display = document.querySelector('#display')
-//     let board = ['', '', '', '', '', '', '', '', '']
-
-//     board.forEach(marker => {
-//         let div = document.createElement('div')
-//         div.textContent = marker
-//         div.setAttribute('class', 'square')
-//         display.appendChild(div)
-//     })
-
-//     return {board}
-// })()
-
 const playerFactory = (name, marker) => {
     const getName = () => name;
     const getMarker = () => marker;
@@ -33,10 +19,16 @@ const gameController = (() => {
     playerTwoDisplay.textContent = `${playerTwo.getName()}: ${playerTwo.getMarker()}`
 
     let currentPlayer = playerOne
+    let gameOver = false
 
     const squares = document.querySelectorAll('.square')
     squares.forEach(square => {
         square.addEventListener('click', (e) => {
+            // If the game has been won and user clicks on the board, it will start a new game starting with playerOne('X')
+            if (gameOver === true) {
+                currentPlayer = playerOne
+                reset()
+            }
             if (!e.target.textContent) {
                 e.target.textContent = currentPlayer.getMarker()
                 board[e.target.id] = currentPlayer.getMarker()
@@ -62,8 +54,17 @@ const gameController = (() => {
         || (board[0] === board[4] && board[4] === board[8] && board[0] !== '')
         || (board[2] === board[4] && board[4] === board[6] && board[2] !== '')) {
             console.log("Game Over")
+            gameOver = true
         } else {
             return
         }
+    }
+
+    const reset = () => {
+        board = ['', '', '', '', '', '', '', '', '']
+        squares.forEach(square => {
+            square.textContent = ''
+        })
+        gameOver = false
     }
 })()
