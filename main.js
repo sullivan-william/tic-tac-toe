@@ -7,6 +7,7 @@ const playerDisplay = document.querySelector('#players')
 const playerOneDisplay = document.querySelector('#p1')
 const playerTwoDisplay = document.querySelector('#p2')
 const resultDisplay = document.querySelector('#results')
+const clearBtn = document.querySelector('#clear')
 
 let playerOne
 let playerTwo
@@ -24,6 +25,12 @@ startBtn.addEventListener('click', (e) => {
     playerDisplay.classList.remove('hidden')
     playerOneDisplay.textContent = `${playerOne.getName()}: ${playerOne.getMarker()}`
     playerTwoDisplay.textContent = `${playerTwo.getName()}: ${playerTwo.getMarker()}`
+    currentPlayer = playerOne
+})
+
+clearBtn.addEventListener('click', (e) => {
+    gameController.reset()
+    playerDisplay.classList.remove('hidden')
     currentPlayer = playerOne
 })
 
@@ -50,6 +57,7 @@ const gameController = (() => {
             if (gameOver === true) {
                 currentPlayer = playerOne
                 reset()
+                playerDisplay.classList.remove('hidden')
             }
             if (!e.target.textContent) {
                 e.target.textContent = currentPlayer.getMarker()
@@ -90,5 +98,8 @@ const gameController = (() => {
             square.textContent = ''
         })
         gameOver = false
+        resultDisplay.classList.add('hidden')
     }
+
+    return {reset}
 })()
