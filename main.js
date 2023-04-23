@@ -101,6 +101,11 @@ const gameController = (() => {
             playerDisplay.classList.add('hidden')
             resultDisplay.classList.remove('hidden')
             resultDisplay.textContent = `${currentPlayer.getName()} is the WINNER!`
+        } else if (!board.includes('')){
+            gameOver = true
+            playerDisplay.classList.add('hidden')
+            resultDisplay.classList.remove('hidden')
+            resultDisplay.textContent = 'It is a DRAW!'
         } else {
             return
         }
