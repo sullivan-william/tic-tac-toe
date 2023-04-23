@@ -8,6 +8,7 @@ const playerOneDisplay = document.querySelector('#p1')
 const playerTwoDisplay = document.querySelector('#p2')
 const resultDisplay = document.querySelector('#results')
 const clearBtn = document.querySelector('#clear')
+const changePlayerBtn = document.querySelector('#change-players')
 
 let playerOne
 let playerTwo
@@ -30,8 +31,21 @@ startBtn.addEventListener('click', (e) => {
 
 clearBtn.addEventListener('click', (e) => {
     gameController.reset()
-    playerDisplay.classList.remove('hidden')
+    if (pvpBtn.classList.contains('hidden') && nameInput.classList.contains('hidden')) {
+        playerDisplay.classList.remove('hidden')
+    }
     currentPlayer = playerOne
+})
+
+changePlayerBtn.addEventListener('click', (e) => {
+    gameController.reset()
+    playerDisplay.classList.add('hidden')
+    if (nameInput.classList.contains('hidden')) {
+        pvpBtn.classList.remove('hidden')
+    }
+    playerOne = null
+    playerTwo = null
+    currentPlayer = null
 })
 
 const playerFactory = (name, marker) => {
