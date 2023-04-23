@@ -6,6 +6,7 @@ const startBtn = document.querySelector('#start-game')
 const playerDisplay = document.querySelector('#players')
 const playerOneDisplay = document.querySelector('#p1')
 const playerTwoDisplay = document.querySelector('#p2')
+const resultDisplay = document.querySelector('#results')
 
 let playerOne
 let playerTwo
@@ -74,8 +75,10 @@ const gameController = (() => {
         || (board[2] === board[5] && board[5] === board[8] && board[2] !== '')
         || (board[0] === board[4] && board[4] === board[8] && board[0] !== '')
         || (board[2] === board[4] && board[4] === board[6] && board[2] !== '')) {
-            console.log("Game Over")
             gameOver = true
+            playerDisplay.classList.add('hidden')
+            resultDisplay.classList.remove('hidden')
+            resultDisplay.textContent = `${currentPlayer.getName()} is the WINNER!`
         } else {
             return
         }
