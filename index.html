@@ -19,9 +19,19 @@
         <div class="square" id="7"></div>
         <div class="square" id="8"></div>
     </div>
-    <div id="details">
-        <h1 id="player-one"></h1>
-        <h1 id="player-two"></h1>
+    <div id="players" class="hidden">
+        <h1 id="p1"></h1>
+        <h1 id="p2"></h1>
+    </div>
+    <div id="name-input" class="hidden">
+        <label for="p1-name">Player 1 (X):</label>
+        <input type="text" name="p1-name" id="p1-name">
+        <label for="p2-name">Player 2 (X):</label>
+        <input type="text" name="p2-name" id="p2-name">
+        <button id="start-game">GO!</button>
+    </div>
+    <div id="controls">
+        <button id="pvp-btn">P1 v P2</button>
     </div>
     <script src="main.js"></script>
 </body>

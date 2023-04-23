@@ -1,3 +1,31 @@
+const pvpBtn = document.querySelector('#pvp-btn')
+const nameInput = document.querySelector('#name-input')
+const playerOneName = document.querySelector('#p1-name')
+const playerTwoName = document.querySelector('#p2-name')
+const startBtn = document.querySelector('#start-game')
+const playerDisplay = document.querySelector('#players')
+const playerOneDisplay = document.querySelector('#p1')
+const playerTwoDisplay = document.querySelector('#p2')
+
+let playerOne
+let playerTwo
+let currentPlayer
+
+pvpBtn.addEventListener('click', (e) => {
+    nameInput.classList.remove('hidden')
+    pvpBtn.classList.add('hidden')
+})
+
+startBtn.addEventListener('click', (e) => {
+    playerOne = playerFactory(playerOneName.value || 'Player 1', 'X')
+    playerTwo = playerFactory(playerTwoName.value || 'Player 2', 'O')
+    nameInput.classList.add('hidden')
+    playerDisplay.classList.remove('hidden')
+    playerOneDisplay.textContent = `${playerOne.getName()}: ${playerOne.getMarker()}`
+    playerTwoDisplay.textContent = `${playerTwo.getName()}: ${playerTwo.getMarker()}`
+    currentPlayer = playerOne
+})
+
 const playerFactory = (name, marker) => {
     const getName = () => name;
     const getMarker = () => marker;
@@ -7,23 +35,16 @@ const playerFactory = (name, marker) => {
 
 const gameController = (() => {
     let board = ['', '', '', '', '', '', '', '', '']
-    // const playerOne = playerFactory(window.prompt('Player 1:'), 'X')
-    // const playerTwo = playerFactory(window.prompt('Player 2:'), 'O')
-    const playerOne = playerFactory('Rufio', 'X')
-    const playerTwo = playerFactory('Robby', 'O')
 
-    const playerOneDisplay = document.querySelector('#player-one')
-    playerOneDisplay.textContent = `${playerOne.getName()}: ${playerOne.getMarker()}`
-
-    const playerTwoDisplay = document.querySelector('#player-two')
-    playerTwoDisplay.textContent = `${playerTwo.getName()}: ${playerTwo.getMarker()}`
-
-    let currentPlayer = playerOne
     let gameOver = false
 
     const squares = document.querySelectorAll('.square')
     squares.forEach(square => {
         square.addEventListener('click', (e) => {
+            // If players have not been named do not start game
+            if (!currentPlayer) {
+                return
+            }
             // If the game has been won and user clicks on the board, it will start a new game starting with playerOne('X')
             if (gameOver === true) {
                 currentPlayer = playerOne

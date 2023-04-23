@@ -4,6 +4,7 @@ body {
     margin: 0px;
     display: grid;
     place-content: center;
+    gap: 16px;
 }
 
 #display {
@@ -19,4 +20,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.hidden {
+    display: none;
 }
